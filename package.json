@@ -1,0 +1,29 @@
+{
+  "name": "dynamap",
+  "version": "0.0.1",
+  "description": "Object mapper for DynamoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dynamodb"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nikuph/dynamap.git"
+  },
+  "author": "Niko Uphoff <nikuph@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikuph/dynamap/issues"
+  },
+  "homepage": "https://github.com/nikuph/dynamap",
+  "dependencies": {
+    "aws-sdk": "2.0.11"
+  },
+  "devDependencies": {
+    "node-uuid": "1.4.1",
+    "rc": "0.5.0"
+  }
+}
