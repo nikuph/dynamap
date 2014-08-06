@@ -71,5 +71,5 @@ function logAnimalsWithPrefix(prefix) {
 }
 
 Animal.query({id: 3}, logAnimalsWithPrefix('querried: '));
-Animal.scan('born NULL', logAnimalsWithPrefix('scanned: '));
+Animal.scan('born LT ' + new Date('2012-01-01').getTime(), logAnimalsWithPrefix('scanned: '));
 Animal.all(logAnimalsWithPrefix('all: '));
