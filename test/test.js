@@ -8,11 +8,17 @@ dynamap.initialize(conf);
 
 var Animal = dynamap.Model({
   tableName: 'animals-test',
-  key: ['animal', 'id'],
+  key: ['id'],
   attributes: {
-    id:     String,
+    id:     Number,
     animal: String,
-    name:   String
+    name:   String,
+    born:   Number
+  },
+  expected: {
+    id: {
+      ComparisonOperator: 'NULL'
+    }
   }
 });
 
@@ -25,7 +31,9 @@ var Animal = dynamap.Model({
 // });
 
 Animal.prototype.beforeSave = function(done) {
-  this.id = uuid.v1();
+  if (this.id === undefined) {
+    this.id = uuid.v1();
+  }
 
   done();
 };
@@ -39,10 +47,10 @@ function logSaving(err, animal) {
 }
 
 var animals = [
-  new Animal({animal: 'dog', name: 'susi'}),
-  new Animal({animal: 'dog', name: 'strolch'}),
-  new Animal({animal: 'cat', name: 'susi'}),
-  new Animal({animal: 'cat', name: 'felix'})
+  new Animal({id: 1, animal: 'dog', name: 'susi',    born: new Date('2010-01-01').getTime()}),
+  new Animal({id: 2, animal: 'dog', name: 'strolch', born: new Date('2011-01-01').getTime()}),
+  new Animal({id: 3, animal: 'cat', name: 'susi',    born: new Date('2012-01-01').getTime()}),
+  new Animal({id: 4, animal: 'cat', name: 'felix',   born: new Date('2013-01-01').getTime()})
 ];
 
 // animals.forEach(function(animal) {
@@ -61,6 +69,6 @@ function logAnimalsWithPrefix(prefix) {
   };
 }
 
-Animal.query({animal: 'cat'}, logAnimalsWithPrefix('querried: '));
-Animal.scan('name EQ susi', logAnimalsWithPrefix('scanned: '));
+Animal.query({id: 3}, logAnimalsWithPrefix('querried: '));
+Animal.scan('born LE ' + new Date('2012-01-01').getTime(), logAnimalsWithPrefix('scanned: '));
 Animal.all(logAnimalsWithPrefix('all: '));
