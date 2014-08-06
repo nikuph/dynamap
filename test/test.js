@@ -50,7 +50,8 @@ var animals = [
   new Animal({id: 1, animal: 'dog', name: 'susi',    born: new Date('2010-01-01').getTime()}),
   new Animal({id: 2, animal: 'dog', name: 'strolch', born: new Date('2011-01-01').getTime()}),
   new Animal({id: 3, animal: 'cat', name: 'susi',    born: new Date('2012-01-01').getTime()}),
-  new Animal({id: 4, animal: 'cat', name: 'felix',   born: new Date('2013-01-01').getTime()})
+  new Animal({id: 4, animal: 'cat', name: 'felix',   born: new Date('2013-01-01').getTime()}),
+  new Animal({id: 5, animal: 'cat', name: 'ingo'})
 ];
 
 // animals.forEach(function(animal) {
@@ -70,5 +71,5 @@ function logAnimalsWithPrefix(prefix) {
 }
 
 Animal.query({id: 3}, logAnimalsWithPrefix('querried: '));
-Animal.scan('born LE ' + new Date('2012-01-01').getTime(), logAnimalsWithPrefix('scanned: '));
+Animal.scan('born NULL', logAnimalsWithPrefix('scanned: '));
 Animal.all(logAnimalsWithPrefix('all: '));
