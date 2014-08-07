@@ -38,6 +38,32 @@ Animal.prototype.beforeSave = function(done) {
   done();
 };
 
+Animal.afterFetch = function(animal, done) {
+  animal.mainupulated = '@fetch';
+  done(null, animal);
+};
+
+Animal.afterQuery = function(animals, lastEvaluatedKey, done) {
+  animals.forEach(function(animal) {
+    animal.mainupulated = '@query';
+  });
+  done(null, animals, lastEvaluatedKey);
+};
+
+Animal.afterScan = function(animals, lastEvaluatedKey, done) {
+  animals.forEach(function(animal) {
+    animal.mainupulated = '@scan';
+  });
+  done(null, animals, lastEvaluatedKey);
+};
+
+Animal.afterAll = function(animal, lastEvaluatedKey, done) {
+  animals.forEach(function(animal) {
+    animal.mainupulated = '@all';
+  });
+  done(null, animals, lastEvaluatedKey);
+};
+
 function logSaving(err, animal) {
   if (err) {
     return console.error(err);
@@ -59,7 +85,7 @@ var animals = [
 // });
 
 function logAnimalsWithPrefix(prefix) {
-  return function(err, animals) {
+  return function(err, animals, lastEvaluatedKey) {
     if (err) {
       return console.error(err);
     }
@@ -70,6 +96,13 @@ function logAnimalsWithPrefix(prefix) {
   };
 }
 
+Animal.fetch(2, function(err, animal) {
+  if (err) {
+    return console.error(err);
+  }
+
+  console.log('fetched: ', animal, animal instanceof Animal);
+});
 Animal.query({id: 3}, logAnimalsWithPrefix('querried: '));
 Animal.scan('born LT ' + new Date('2012-01-01').getTime(), logAnimalsWithPrefix('scanned: '));
 Animal.all(logAnimalsWithPrefix('all: '));
