@@ -13,7 +13,8 @@ var Animal = dynamap.Model({
     id:     Number,
     animal: String,
     name:   String,
-    born:   Number
+    born:   Number,
+    size:   String
   },
   expected: {
     id: {
@@ -29,6 +30,10 @@ var Animal = dynamap.Model({
 // Animal.schema.deleteTable(function(err, done) {
 //   console.log(err, done);
 // });
+
+Animal.prototype.initialize = function() {
+  this.size = 'medium';
+};
 
 Animal.prototype.beforeSave = function(done) {
   if (this.id === undefined) {
@@ -79,6 +84,9 @@ var animals = [
   new Animal({id: 4, animal: 'cat', name: 'felix',   born: new Date('2013-01-01').getTime()}),
   new Animal({id: 5, animal: 'cat', name: 'ingo'})
 ];
+
+var franz = new Animal({id: 6, animal: 'rhino', name: 'franz'});
+console.log('initialized animal: ', franz);
 
 // animals.forEach(function(animal) {
 //   animal.save(logSaving);
