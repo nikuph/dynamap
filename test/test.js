@@ -2,12 +2,15 @@ var rc      = require('rc');
 var uuid    = require('node-uuid');
 var dynamap = require('../lib/dynamap');
 
-var conf = rc('dynamodb');
+var conf = rc('dynamodb', {
+  region: 'eu-west-1',
+  tableNameSuffix: 'test'
+});
 
 dynamap.initialize(conf);
 
-var Animal = dynamap.Model({
-  tableName: 'animals-test',
+var Animal = dynamap.model({
+  tableName: 'animals',
   key: ['id'],
   attributes: {
     id:     Number,
