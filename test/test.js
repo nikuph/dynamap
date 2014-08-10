@@ -113,7 +113,17 @@ Animal.fetch(2, function(err, animal) {
   }
 
   console.log('fetched: ', animal, animal instanceof Animal);
+
+  animal.name = 'susanne';
+  animal.update(function(err, updatedAnimal) {
+    if (err) {
+      return console.error(err);
+    }
+
+    console.log(updatedAnimal);
+  });
 });
-Animal.query({id: 3}, logAnimalsWithPrefix('querried: '));
-Animal.scan('born LT ' + new Date('2012-01-01').getTime(), logAnimalsWithPrefix('scanned: '));
-Animal.all(logAnimalsWithPrefix('all: '));
+
+// Animal.query({id: 3}, logAnimalsWithPrefix('querried: '));
+// Animal.scan('born LT ' + new Date('2012-01-01').getTime(), logAnimalsWithPrefix('scanned: '));
+// Animal.all(logAnimalsWithPrefix('all: '));
