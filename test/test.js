@@ -47,27 +47,29 @@ Animal.prototype.beforeSave = function(done) {
 };
 
 Animal.afterFetch = function(animal, done) {
-  animal.mainupulated = '@fetch';
+  if (animal) {
+    animal.manipulated = '@fetch';
+  }
   done(null, animal);
 };
 
 Animal.afterQuery = function(animals, lastEvaluatedKey, done) {
   animals.forEach(function(animal) {
-    animal.mainupulated = '@query';
+    animal.manipulated = '@query';
   });
   done(null, animals, lastEvaluatedKey);
 };
 
 Animal.afterScan = function(animals, lastEvaluatedKey, done) {
   animals.forEach(function(animal) {
-    animal.mainupulated = '@scan';
+    animal.manipulated = '@scan';
   });
   done(null, animals, lastEvaluatedKey);
 };
 
 Animal.afterAll = function(animal, lastEvaluatedKey, done) {
   animals.forEach(function(animal) {
-    animal.mainupulated = '@all';
+    animal.manipulated = '@all';
   });
   done(null, animals, lastEvaluatedKey);
 };
@@ -107,12 +109,16 @@ function logAnimalsWithPrefix(prefix) {
   };
 }
 
-Animal.fetch(2, function(err, animal) {
+Animal.fetch(77, function(err, animal) {
   if (err) {
     return console.error(err);
   }
 
   console.log('fetched: ', animal, animal instanceof Animal);
+
+  if (!animal) {
+    return;
+  }
 
   animal.name = 'susanne';
   animal.update(function(err, updatedAnimal) {
