@@ -1,6 +1,6 @@
 {
   "name": "dynamap",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Object mapper for DynamoDB",
   "main": "index.js",
   "scripts": {
