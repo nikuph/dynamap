@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/nikuph/dynamap",
   "dependencies": {
-    "aws-sdk": "2.0.11"
+    "aws-sdk": "2.0.12"
   },
   "devDependencies": {
     "node-uuid": "1.4.1",
