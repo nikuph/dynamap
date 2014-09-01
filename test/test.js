@@ -130,6 +130,6 @@ Animal.fetch(77, function(err, animal) {
   });
 });
 
-// Animal.query({id: 3}, logAnimalsWithPrefix('querried: '));
-// Animal.scan('born LT ' + new Date('2012-01-01').getTime(), logAnimalsWithPrefix('scanned: '));
+Animal.query({attribute: 'id', value: 3}, logAnimalsWithPrefix('querried: '));
+Animal.scan({attribute: 'born', value: new Date('2012-01-01').getTime(), operator: 'LT'}, logAnimalsWithPrefix('scanned: '));
 // Animal.all(logAnimalsWithPrefix('all: '));
