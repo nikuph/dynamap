@@ -1,6 +1,6 @@
 {
   "name": "dynamap",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Object mapper for DynamoDB",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/nikuph/dynamap",
   "dependencies": {
-    "aws-sdk": "2.0.15"
+    "aws-sdk": "2.0.19"
   },
   "devDependencies": {
     "node-uuid": "1.4.1",
