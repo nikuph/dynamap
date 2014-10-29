@@ -24,6 +24,6 @@
   },
   "devDependencies": {
     "node-uuid": "1.4.1",
-    "rc": "0.5.1"
+    "rc": "0.5.2"
   }
 }
